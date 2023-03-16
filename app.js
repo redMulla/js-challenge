@@ -24,7 +24,6 @@ if (value.startsWith("--filter="))
     for (let i = 0; i < data.length; i++)
     {
         let people = data[i].people
-        let found = [];
         for (let j = 0; j < people.length; j++)
         {
             const animals = people[j].animals;
