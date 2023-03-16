@@ -12,25 +12,38 @@ if (process.argv.length !== 3)
 if (value.startsWith("--filter="))
 {
     let arr = [];
+    let helper = [];
 
     for (let i = 9; i < value.length; i++)
     {
         arr.push(value[i])
     }
     
-    let argument = arr.toString();
-    for (let i = 0; i < res.data.length; i++)
+    let ref = arr.join('');
+    for (let i = 0; i < data.length; i++)
     {
-        // let animals = data[i]['people']
-        // console.log(JSON.stringify(animals))
-    }
+        let people = data[i].people
+        let found = [];
+        for (let j = 0; j < people.length; j++)
+        {
+            const animals = people[j].animals
+            for (let k = 0; k < animals.length; k++)
+            {
+                let name = animals[k].name
 
+                if (name.includes(ref))
+                {
+                    
+                }
+            }
+        }
+    }
+    console.log(data[2])
 }
 
-console.log(data[1].people[1].animals)
+// console.log(data[1].people[1].animals)
 
 for (let i = 0; i < value.length; i++)
 {
     // console.log(`${value[i]}`)
 }
-// console.log(jsonData)
