@@ -38,20 +38,6 @@ if (value.startsWith("--filter="))
             else
             {
                 notFound.push([j])
-                // people.splice([j]);
-                // console.log(people[j].animals)
-                // const index = helper.findIndex(country => country.name == data[i].name)
-                // idx.push(index)
-                // const replace = helper[index].people.filter(person => person.name == people[j].name)
-                // console.log(index)
-                // // helper[index].people = replace
-                // const ani = helper[index].people.findIndex(person => person.name == people[j].name)
-                // // helper[index].people[ani] = [];
-                // // console.log(replace)
-                // for (let l = 0; l < replace.length; l++)
-                // {
-                //     found.push(replace[l])
-                // }
             }
         }
         notFound.reverse()
@@ -59,14 +45,10 @@ if (value.startsWith("--filter="))
         {
             data[i].people.splice(notFound[r], 1);
         }
-        // console.log(data[i].people)
         if (!bool)
         {
             helper.push(i)
         }
-
-        // console.log(helper.length)
-        // console.log(found)
     }
     helper.reverse()
     for (let h = 0; h < helper.length; h++)
