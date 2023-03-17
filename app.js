@@ -14,7 +14,7 @@ if (value.startsWith("--filter="))
 {
     let arr = [];
     let helper = [];
-
+    
     for (let i = 9; i < value.length; i++)
     {
         arr.push(value[i])
@@ -23,25 +23,57 @@ if (value.startsWith("--filter="))
     let ref = arr.join('');
     for (let i = 0; i < data.length; i++)
     {
+        let notFound = [];
+        let bool = false;
         let people = data[i].people
         for (let j = 0; j < people.length; j++)
         {
             const animals = people[j].animals;
-            const included = animals.filter(animal => animal.name.includes(ref));
-
-            if (included.length > 0) 
+            const included = animals.filter(animal => animal.name.toLowerCase().includes(ref.toLowerCase()));
+            if (included.length > 0)
             {
-
-                helper.push(data[i])
-                const index = helper.findIndex(country => country.name == data[i].name)
-                const replace = helper[index].people.filter(person => person.name == people[j].name)
-                helper[index].people = replace
-                const ani = helper[index].people.findIndex(person => person.name == people[j].name)
-                helper[index].people[ani].animals = included;
+                people[j].animals = included;
+                bool = true;
+            }
+            else
+            {
+                notFound.push([j])
+                // people.splice([j]);
+                // console.log(people[j].animals)
+                // const index = helper.findIndex(country => country.name == data[i].name)
+                // idx.push(index)
+                // const replace = helper[index].people.filter(person => person.name == people[j].name)
+                // console.log(index)
+                // // helper[index].people = replace
+                // const ani = helper[index].people.findIndex(person => person.name == people[j].name)
+                // // helper[index].people[ani] = [];
+                // // console.log(replace)
+                // for (let l = 0; l < replace.length; l++)
+                // {
+                //     found.push(replace[l])
+                // }
             }
         }
+        notFound.reverse()
+        for (let r = 0; r < notFound.length; r++)
+        {
+            data[i].people.splice(notFound[r], 1);
+        }
+        // console.log(data[i].people)
+        if (!bool)
+        {
+            helper.push(i)
+        }
+
+        // console.log(helper.length)
+        // console.log(found)
     }
-    console.log(util.inspect(helper, false, null, true))
+    helper.reverse()
+    for (let h = 0; h < helper.length; h++)
+    {
+        data.splice(helper[h], 1)
+    }
+    console.log(util.inspect(data, false, null, true))
 }
 else if (value.startsWith("--count"))
 {
